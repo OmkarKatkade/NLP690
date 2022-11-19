@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonServiceService } from '../common-service.service';
 
 @Component({
   selector: 'app-input',
@@ -12,7 +13,7 @@ export class InputComponent implements OnInit {
   audioChunks:any = [];
   audioUrl:any;
   playAudioOption:boolean = false;
-  constructor() { }
+  constructor(private commonService : CommonServiceService) { }
 
   ngOnInit(): void {
   }
@@ -44,6 +45,12 @@ export class InputComponent implements OnInit {
     this.playAudioOption = true;
     this.startRecording = true;
     this.mediaRecorder.stop();
+    //send the API request here, when stopped
+    let receivedJSON = this.commonService.sendAudio(this.audioUrl);
+    console.log(receivedJSON);
+    //try to receive the response in the output component
+
+
   }
 
   playAudio(){
