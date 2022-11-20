@@ -30,6 +30,7 @@ export class SRServiceService {
 
   start()
   {
+    this.text = "";
     this.isStoppedSpeechRecognition = false;
     this.recognition.start();
     this.recognition.addEventListener('end', (condition: any) => {
