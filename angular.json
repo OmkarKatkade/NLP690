@@ -110,5 +110,8 @@
       }
     }
   },
-  "defaultProject": "NLP690"
+  "defaultProject": "NLP690",
+  "cli": {
+    "analytics": false
+  }
 }

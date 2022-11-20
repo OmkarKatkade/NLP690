@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonServiceService } from '../common-service.service';
+import { SRServiceService } from '../srservice.service';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css']
+  styleUrls: ['./input.component.css'],
+  providers:[SRServiceService]
 })
 export class InputComponent implements OnInit {
 
+  text:any;
   startRecording:boolean = true;
   mediaRecorder:any;
   audioChunks:any = [];
   audioUrl:any;
   playAudioOption:boolean = false;
-  constructor(private commonService : CommonServiceService) { }
+  constructor(private commonService : CommonServiceService, 
+              public service:SRServiceService) {
+                this.service.init();
+               }
 
   ngOnInit(): void {
   }
@@ -54,8 +60,21 @@ export class InputComponent implements OnInit {
   }
 
   playAudio(){
+    // this.startRecording = false;
     const audio = new Audio(this.audioUrl);
     audio.play();
+  }
+
+  
+  startService(){
+    this.startRecording = false;
+    this.service.start();
+  }
+
+  stopService()
+  {
+    this.startRecording = true;
+    this.service.stop();
   }
 
 }
